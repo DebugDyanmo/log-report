@@ -1,4 +1,4 @@
-artifacts = "/app/out.json"
+artifacts = ["/app/report.json"]
 
 [task]
 name = "dynamo/log-report"
@@ -13,8 +13,8 @@ expert_time_estimate_hours = 0.3
 model_tested = "GPT-5.4"
 agent_tested = "Terminus-2"
 difficulty_explanation = "Parse a small access log and emit summary stats."
-solution_explanation = "Read the log, count requests/unique IPs, find the top path."
-verification_explanation = "Check the report file."
+solution_explanation = "Read the log, count requests, unique IPs, and the top requested path, then write them as JSON."
+verification_explanation = "Verifier independently recomputes total_requests, unique_ips, and top_path from access.log and compares them against the values in report.json."
 
 [verifier]
 timeout_sec = 120.0
@@ -28,5 +28,5 @@ cpus = 1
 memory_mb = 2048
 storage_mb = 10240
 gpus = 0
-allow_internet = true
+allow_internet = false
 mcp_servers = []
